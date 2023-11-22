@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
-from polls.utils import load_categories, load_products
+from ...utils import load_categories, load_products, set_category_parents
+
 
 class Command(BaseCommand):
     help = 'Load data into the database'
@@ -22,5 +23,6 @@ id:title:category_id:count:cost
 """ 
 
         load_categories(categories)
+        set_category_parents(categories)
         load_products(products)
         self.stdout.write(self.style.SUCCESS('Successfully loaded data'))

@@ -1,24 +1,25 @@
 from .models import Category, Product
 
 def load_categories(data):
-    for line in data.strip().split("\n")[1:]:  # Пропускаем строку заголовка
-        id, title, parent = line.split(":")
-        try:
-            if parent != 'None':
-                parent_obj = Category.objects.get(id=int(parent))
-            else:
-                parent_obj = None
+    for line in data.strip().split("\n")[1:]:
+        id, title, _ = line.split(":")
+        Category.objects.update_or_create(
+            id=int(id),
+            defaults={'title': title}
+        )
 
-            Category.objects.update_or_create(
-                id=int(id),
-                defaults={'title': title, 'parent': parent_obj}
-            )
-        except Category.DoesNotExist:
-            print(f"Не удалось найти родительскую категорию с ID {parent} для '{title}'. Пропуск создания категории.")
-
+def set_category_parents(data):
+    for line in data.strip().split("\n")[1:]:
+        id, _, parent = line.split(":")
+        category = Category.objects.get(id=int(id))
+        if parent != 'None':
+            parent_obj = Category.objects.get(id=int(parent))
+            category.parent = parent_obj
+            category.save()
+            
 def load_products(data):
-    for line in data.strip().split("\n")[1:]:  # Пропускаем строку заголовка
-        parts = line.split(":", 4)  # Ограничиваем количество разделений до 4
+    for line in data.strip().split("\n")[1:]: 
+        parts = line.split(":", 4)
         if len(parts) != 5:
             print(f"Некорректный формат строки: {line}")
             continue
