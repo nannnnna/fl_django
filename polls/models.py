@@ -24,12 +24,17 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if self.quantity < 0:
-            self.quantity = 0
+            print(f"Ошибка: значение quantity ({self.quantity}) меньше нуля. Элемент не будет сохранен.")
+            return
         if self.quantity > 100000:
-            self.quantity = 100000
-        if self.price < 0:
-            self.price = 0.0
+            print(f"Ошибка: значение quantity ({self.quantity}) больше максимально допустимого значения. Элемент не будет сохранен.")
+            return
+        if self.price < 0.0:
+            print(f"Ошибка: значение price ({self.price}) меньше нуля. Элемент не будет сохранен.")
+            return
+
         super(Product, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.title
