@@ -6,8 +6,7 @@
 
     git clone https://github.com/nannnnna/fl_django.git
     cd fl_django
-    python -m venv venv
-    source venv/bin/activate (on Linux and MacOS) or venv/Scripts/activate (on Windows)
+    
 ### Run
 
     docker-compose up -d --build
