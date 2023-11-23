@@ -10,10 +10,10 @@
     source venv/bin/activate (on Linux and MacOS) or venv/Scripts/activate (on Windows)
 ### Run
 
-   docker-compose up -d --build
+    docker-compose up -d --build
     
 
-### Kill
+### Stop and delete web and postgres containers
 
     docker-compose down
 
