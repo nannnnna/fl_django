@@ -6,6 +6,21 @@
 
     git clone https://github.com/nannnnna/fl_django.git
     cd fl_django
+
+### Setup
+
+    you must create .env file with these parametrs or use .env_example:
+    KEY=
+    DB_NAME=
+    DB_USER=
+    DB_PASSWORD=
+    DB_HOST=postgres
+    DB_PORT=5432
+    POSTGRES_PASSWORD=
+
+    in DB_HOST write the name of the service from the docker 
+    docker-compose  run --rm web  python gen_key.py
+    write to env your secret key 
     
 ### Run
 
