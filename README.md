@@ -25,6 +25,10 @@
 ### Run
 
     docker-compose up -d --build
+
+### Check
+
+    listening on http://localhost:8000/
     
 
 ### Stop and delete web and postgres containers
